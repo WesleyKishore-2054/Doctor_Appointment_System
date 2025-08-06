@@ -1,13 +1,13 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  url: 'postgresql://wesley_kishore:Jn07hrTbvuFGm1aOQJuKluBEF2Zvb8eq@dpg-d29i6q2li9vc73fosa50-a.oregon-postgres.render.com/backend_db_wesley',
-  ssl: {
-    rejectUnauthorized: false,
-  },
-  synchronize: true, 
+  url: process.env.DATABASE_URL,
   entities: ['src/entities/*.entity.{ts,js}'],
   migrations: ['src/migrations/*.{ts,js}'],
+  synchronize: true, // For development only
 });
